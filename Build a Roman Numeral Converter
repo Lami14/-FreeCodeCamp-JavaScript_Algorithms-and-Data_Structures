@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Numeral Converter</title>
+    <style>
+        /* Add your personal styling here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Roman Numeral Converter</h1>
+    <input type="number" id="number" placeholder="Enter a number">
+    <button id="convert-btn">Convert</button>
+    <div id="output"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+document.getElementById('convert-btn').addEventListener('click', function() {
+    const numberInput = document.getElementById('number').value;
+    const outputDiv = document.getElementById('output');
+    const number = parseInt(numberInput);
+
+    if (!numberInput) {
+        outputDiv.textContent = "Please enter a valid number";
+        return;
+    }
+
+    if (number < 1) {
+        outputDiv.textContent = "Please enter a number greater than or equal to 1";
+        return;
+    }
+
+    if (number >= 4000) {
+        outputDiv.textContent = "Please enter a number less than or equal to 3999";
+        return;
+    }
+
+    outputDiv.textContent = convertToRoman(number);
+});
+
+function convertToRoman(num) {
+    const romanNumeralMap = [
+        { value: 1000, numeral: 'M' },
+        { value: 900, numeral: 'CM' },
+        { value: 500, numeral: 'D' },
+        { value: 400, numeral: 'CD' },
+        { value: 100, numeral: 'C' },
+        { value: 90, numeral: 'XC' },
+        { value: 50, numeral: 'L' },
+        { value: 40, numeral: 'XL' },
+        { value: 10, numeral: 'X' },
+        { value: 9, numeral: 'IX' },
+        { value: 5, numeral: 'V' },
+        { value: 4, numeral: 'IV' },
+        { value: 1, numeral: 'I' }
+    ];
+
+    let romanNumeral = '';
+
+    romanNumeralMap.forEach(item => {
+        while (num >= item.value) {
+            romanNumeral += item.numeral;
+            num -= item.value;
+        }
+    });
+
+    return romanNumeral;
+}
