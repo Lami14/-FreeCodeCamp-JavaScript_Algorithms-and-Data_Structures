@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+</head>
+<body>
+    <h1>Palindrome Checker</h1>
+    <input type="text" id="text-input" placeholder="Enter text here">
+    <button id="check-btn">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function isPalindrome(str) {
+            // Remove non-alphanumeric characters and convert to lowercase
+            let processedStr = str.replace(/[^a-z0-9]/gi, '').toLowerCase();
+            // Compare processed string to its reverse
+            return processedStr === processedStr.split('').reverse().join('');
+        }
+
+        document.getElementById('check-btn').addEventListener('click', function() {
+            const input = document.getElementById('text-input').value;
+            if (!input) {
+                alert("Please input a value");
+                return;
+            }
+            const resultElement = document.getElementById('result');
+            if (isPalindrome(input)) {
+                resultElement.textContent = `${input} is a palindrome`;
+            } else {
+                resultElement.textContent = `${input} is not a palindrome`;
+            }
+        });
+    </script>
+</body>
+</html>
+
